@@ -1,0 +1,21 @@
+mysql> SELECT
+    ->     R.RouteID,
+    ->     R.RouteName,
+    ->     COUNT(P.PassengerID) AS TotalBookings,
+    ->     SUM(CASE WHEN P.TravelAgentID IS NULL THEN 1 ELSE 0 END) AS BookingsWithoutAgent,
+    ->     SUM(CASE WHEN P.TravelAgentID IS NOT NULL THEN 1 ELSE 0 END) AS BookingsWithAgent
+    -> FROM
+    ->     Routes R
+    -> LEFT JOIN
+    ->     Passengers P ON R.RouteID = P.RouteID
+    -> GROUP BY
+    ->     R.RouteID
+    -> HAVING
+    ->     BookingsWithoutAgent > BookingsWithAgent;
++---------+------------------------------+---------------+----------------------+-------------------+
+| RouteID | RouteName                    | TotalBookings | BookingsWithoutAgent | BookingsWithAgent |
++---------+------------------------------+---------------+----------------------+-------------------+
+|       3 | Secunderabad - Visakhapatnam |             1 |                    1 |                 0 |
+|       6 | Bhopal - Delhi               |             1 |                    1 |                 0 |
+|       9 | Bhopal - Indore              |             1 |                    1 |                 0 |
++---------+------------------------------+---------------+----------------------+-------------------+
