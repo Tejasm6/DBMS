@@ -365,13 +365,5 @@ mysql> desc Passengers;
 +-------------+-----------------+------+---------+-------------+---------------+
 
 
-mysql> 
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
-mysql>
+
 
